@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
 
+/* ── Reset & variables ───────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -48,6 +49,7 @@ input, select, textarea { font-family: inherit; }
   padding: 0 24px;
 }
 
+/* ── Buttons ─────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -76,6 +78,7 @@ input, select, textarea { font-family: inherit; }
 .btn-xs      { padding: 5px 12px; font-size: 12px; }
 .btn-full    { width: 100%; justify-content: center; }
 
+/* ── Navigation ──────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 900;
@@ -159,6 +162,7 @@ nav {
   cursor: pointer; padding: 4px;
 }
 
+/* ── Hero ────────────────────────────────────────────────── */
 .hero {
   display: grid;
   grid-template-columns: 55% 45%;
@@ -222,6 +226,7 @@ nav {
 .stat-num   { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; }
 .stat-lbl   { font-size: 13px; color: var(--brown-mid); margin-top: 2px; }
 
+/* Hero right panel */
 .hero-right {
   background: var(--beige);
   display: flex;
@@ -291,6 +296,7 @@ nav {
 }
 .hero-card-price { font-size: 15px; font-weight: 700; color: var(--rust); }
 
+/* ── Sections ────────────────────────────────────────────── */
 .section { padding: 80px 0; }
 .section-alt { background: var(--beige); }
 
@@ -304,6 +310,7 @@ nav {
 .section-header h2 { font-size: 36px; color: var(--brown); margin-bottom: 12px; }
 .section-header p  { color: var(--brown-mid); font-size: 16px; max-width: 480px; margin: 0 auto; }
 
+/* ── Product Cards ───────────────────────────────────────── */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -345,6 +352,7 @@ nav {
   padding: 4px 10px;
 }
 
+/* ── Category Cards ──────────────────────────────────────── */
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -364,6 +372,7 @@ nav {
 .cat-icon { font-size: 36px; margin-bottom: 12px; }
 .cat-name { font-size: 13px; font-weight: 600; }
 
+/* ── CTA Banner ──────────────────────────────────────────── */
 .cta-banner {
   background: var(--brown);
   border-radius: var(--radius);
@@ -376,6 +385,7 @@ nav {
 .cta-banner h2 { font-size: 32px; color: var(--cream); }
 .cta-banner p  { color: var(--tan); margin-top: 8px; }
 
+/* ── Forms (login / register / add-product etc.) ─────────── */
 .form-page {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
@@ -427,6 +437,7 @@ nav {
 }
 .form-footer a { color: var(--rust); font-weight: 600; }
 
+/* Role picker */
 .role-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
 .role-opt {
   border: 2px solid var(--tan); border-radius: var(--radius-sm);
@@ -439,6 +450,7 @@ nav {
 .role-opt-label     { font-size: 14px; font-weight: 600; }
 .role-opt-sub       { font-size: 12px; color: var(--brown-mid); margin-top: 2px; }
 
+/* ── Alerts ──────────────────────────────────────────────── */
 .alert {
   padding: 12px 16px; border-radius: var(--radius-sm);
   margin-bottom: 20px; font-size: 14px;
@@ -448,6 +460,7 @@ nav {
 .alert-info    { background: #ebf8ff; border: 1px solid #bee3f8; color: #2a69ac; }
 .alert-warn    { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
 
+/* ── Page wrapper (post-nav padding) ─────────────────────── */
 .page-top { padding-top: 72px; }
 
 .page-header {
@@ -460,6 +473,7 @@ nav {
 
 .page-body { padding: 36px 0; }
 
+/* ── Breadcrumb ──────────────────────────────────────────── */
 .breadcrumb {
   display: flex; align-items: center; gap: 8px;
   font-size: 13px; color: var(--brown-mid);
@@ -468,6 +482,7 @@ nav {
 .breadcrumb a  { color: var(--rust); }
 .breadcrumb span { color: var(--tan); }
 
+/* ── Dashboard stat cards ────────────────────────────────── */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -485,6 +500,7 @@ nav {
 .stat-card-value { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; }
 .stat-card-label { font-size: 13px; color: var(--brown-mid); margin-top: 4px; }
 
+/* ── White box / panel ───────────────────────────────────── */
 .panel {
   background: var(--white);
   border-radius: var(--radius);
@@ -499,6 +515,7 @@ nav {
 .panel-header h3 { font-size: 17px; }
 .panel-body { padding: 24px; }
 
+/* ── Tables ──────────────────────────────────────────────── */
 .table-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-xs); overflow: auto; }
 
 table { width: 100%; border-collapse: collapse; }
@@ -516,6 +533,7 @@ tbody tr:hover { background: var(--cream); }
 tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 .td-muted { color: var(--brown-mid); }
 
+/* ── Status badges ───────────────────────────────────────── */
 .badge {
   display: inline-block;
   padding: 3px 10px; border-radius: var(--radius-pill);
@@ -535,6 +553,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 .badge-seller     { background: #ede9fe; color: #5b21b6; }
 .badge-admin      { background: #fef3c7; color: #92400e; }
 
+/* ── Browse page filter bar ──────────────────────────────── */
 .filter-bar {
   background: var(--white);
   border-radius: var(--radius);
@@ -573,6 +592,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 }
 .filter-select:focus { border-color: var(--rust); }
 
+/* ── Cart page ───────────────────────────────────────────── */
 .cart-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -624,6 +644,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 }
 .remove-btn:hover { color: #e53e3e; }
 
+/* Order summary box */
 .order-summary {
   background: var(--white);
   border-radius: var(--radius);
@@ -638,6 +659,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
   font-weight: 700; font-size: 16px;
 }
 
+/* ── Product detail page ─────────────────────────────────── */
 .product-detail {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -661,6 +683,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 .detail-meta { font-size: 13px; color: var(--brown-mid); margin-bottom: 20px; }
 .detail-meta span { font-weight: 600; color: var(--brown); }
 
+/* ── Image upload preview ────────────────────────────────── */
 .img-upload-area {
   border: 2px dashed var(--tan);
   border-radius: var(--radius-sm);
@@ -678,6 +701,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 .img-upload-area p { font-size: 13px; color: var(--brown-mid); margin-top: 8px; }
 .img-preview { max-height: 120px; border-radius: var(--radius-sm); margin: 12px auto 0; }
 
+/* ── Empty states ────────────────────────────────────────── */
 .empty-state {
   text-align: center; padding: 60px 20px;
   color: var(--brown-mid);
@@ -686,6 +710,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
 .empty-state h3 { font-size: 20px; color: var(--brown); margin-bottom: 8px; }
 .empty-state p  { font-size: 14px; max-width: 320px; margin: 0 auto 20px; }
 
+/* ── Search overlay ──────────────────────────────────────── */
 .search-overlay {
   display: none;
   position: fixed; inset: 0;
@@ -708,6 +733,7 @@ tbody td { padding: 13px 18px; font-size: 14px; vertical-align: middle; }
   font-size: 16px; outline: none;
 }
 
+/* ── Footer ──────────────────────────────────────────────── */
 footer {
   background: var(--brown); color: var(--tan);
   padding: 64px 0 28px;
@@ -740,6 +766,7 @@ footer {
   font-size: 13px; color: rgba(255,255,255,.4);
 }
 
+/* ── Pagination ──────────────────────────────────────────── */
 .pagination {
   display: flex; gap: 8px; justify-content: center;
   flex-wrap: wrap; margin-top: 40px;
@@ -756,6 +783,7 @@ footer {
 .page-link:hover,
 .page-link.active { background: var(--rust); color: #fff; }
 
+/* ── Sidebar layout (used in admin/seller dashboards) ────── */
 .dash-layout {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -799,6 +827,7 @@ footer {
   margin: 12px 12px;
 }
 
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .cart-layout { grid-template-columns: 1fr; }
