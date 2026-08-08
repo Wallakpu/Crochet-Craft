@@ -15,7 +15,7 @@ if (!$product) {
     exit;
 }
 
-$cats  = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
+$cats  = $pdo->query("SELECT * FROM categories ORDER BY (name = 'Other'), name")->fetchAll();
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/db.php';
 requireRole('seller');
 
 $uid   = currentUser()['id'];
-$cats  = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
+$cats  = $pdo->query("SELECT * FROM categories ORDER BY (name = 'Other'), name")->fetchAll();
 $error = '';
 $success = '';
 
