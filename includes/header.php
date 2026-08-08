@@ -34,6 +34,21 @@ $user      = currentUser();
       <?php endif; ?>
       <li><a href="<?= BASE_URL ?>/index.php#about">About</a></li>
       <li><a href="<?= BASE_URL ?>/index.php#contact">Contact</a></li>
+
+      <!-- Account links: hidden on desktop (shown in nav-actions instead), visible in the mobile dropdown -->
+      <?php if (!$user): ?>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/auth/login.php">Login</a></li>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/auth/register.php">Sign Up</a></li>
+      <?php elseif ($user['role'] === 'user'): ?>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/user/dashboard.php">My Account</a></li>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/auth/logout.php">Logout</a></li>
+      <?php elseif ($user['role'] === 'seller'): ?>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/seller/dashboard.php">Seller Hub</a></li>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/auth/logout.php">Logout</a></li>
+      <?php elseif ($user['role'] === 'admin'): ?>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/admin/dashboard.php">Admin</a></li>
+        <li class="nav-mobile-only"><a href="<?= BASE_URL ?>/auth/logout.php">Logout</a></li>
+      <?php endif; ?>
     </ul>
 
     <!-- Right-side actions -->
