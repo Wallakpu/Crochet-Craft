@@ -92,14 +92,14 @@ require_once ROOT . '/includes/header.php';
     <div class="container">
 
       <!-- Filter bar -->
-      <form method="GET" class="filter-bar">
+      <form method="GET" class="filter-bar" id="filterForm">
         <div class="search-wrap">
           <span class="si"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" name="q" value="<?= htmlspecialchars($search) ?>"
-                 placeholder="Search products…">
+                 placeholder="Search products…" id="searchInput">
         </div>
 
-        <select name="category" class="filter-select">
+        <select name="category" class="filter-select" onchange="this.form.submit()">
           <option value="">All categories</option>
           <?php foreach ($cats as $c): ?>
             <option value="<?= htmlspecialchars($c['name']) ?>"
@@ -109,7 +109,7 @@ require_once ROOT . '/includes/header.php';
           <?php endforeach; ?>
         </select>
 
-        <select name="sort" class="filter-select">
+        <select name="sort" class="filter-select" onchange="this.form.submit()">
           <option value="newest"     <?= $sort==='newest'     ? 'selected':'' ?>>Newest</option>
           <option value="price_asc"  <?= $sort==='price_asc'  ? 'selected':'' ?>>Price: Low → High</option>
           <option value="price_desc" <?= $sort==='price_desc' ? 'selected':'' ?>>Price: High → Low</option>
@@ -117,15 +117,24 @@ require_once ROOT . '/includes/header.php';
         </select>
 
         <input type="number" name="min_price" class="filter-select"
-               placeholder="Min NPR" value="<?= $minPrice ?: '' ?>" min="0" style="width:110px;">
+               placeholder="Min NPR" value="<?= $minPrice ?: '' ?>" min="0" style="width:110px;"
+               onchange="this.form.submit()">
         <input type="number" name="max_price" class="filter-select"
-               placeholder="Max NPR" value="<?= $maxPrice ?: '' ?>" min="0" style="width:110px;">
+               placeholder="Max NPR" value="<?= $maxPrice ?: '' ?>" min="0" style="width:110px;"
+               onchange="this.form.submit()">
 
-        <button type="submit" class="btn btn-dark btn-sm">Filter</button>
         <?php if ($search || $category || $minPrice || $maxPrice): ?>
           <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-outline btn-sm">Clear</a>
         <?php endif; ?>
       </form>
+      <script>
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('filterForm').submit();
+          }
+        });
+      </script>
 
       <!-- Product grid -->
       <?php if ($products): ?>
