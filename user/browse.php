@@ -66,7 +66,7 @@ $dataStmt->execute($dataParams);
 $products   = $dataStmt->fetchAll();
 
 // Categories for filter dropdown
-$cats = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
+$cats = $pdo->query("SELECT * FROM categories ORDER BY (name = 'Other'), name")->fetchAll();
 
 $pageTitle = 'Shop — CrochetCraft';
 require_once ROOT . '/includes/header.php';

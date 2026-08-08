@@ -90,14 +90,16 @@ CREATE TABLE cart (
 
 
 INSERT INTO categories (name, slug, icon) VALUES
-('Amigurumi','amigurumi','🐻'),
-('Hats','hats','🧢'),
-('Scarves','scarves','🧣'),
-('Bags','bags','👜'),
-('Keyrings','keyrings','🔑'),
-('Plushies', 'plushies','🧸'),
-('Home Decor','home-decor','🏠'),
-('Clothing','clothing','👕'),
-('Tools & Equipment','tools-equipment', '🪡');
+('Amigurumi','amigurumi','fa-solid fa-cat'),
+('Hats','hats','fa-solid fa-hat-wizard'),
+('Scarves','scarves','fa-solid fa-ribbon'),
+('Bags','bags','fa-solid fa-bag-shopping'),
+('Keyrings','keyrings','fa-solid fa-key'),
+('Plushies', 'plushies','fa-solid fa-paw'),
+('Home Decor','home-decor','fa-solid fa-house'),
+('Clothing','clothing','fa-solid fa-shirt'),
+('Tools & Equipment','tools-equipment', 'fa-solid fa-toolbox'),
+('Accessories','accessories','fa-solid fa-gem'),
+('Other','other','fa-solid fa-shapes');
 
 
