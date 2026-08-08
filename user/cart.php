@@ -104,7 +104,7 @@ require_once ROOT . '/includes/header.php';
                        src="<?= UPLOAD_URL . htmlspecialchars($item['image_path']) ?>"
                        alt="<?= htmlspecialchars($item['name']) ?>">
                 <?php else: ?>
-                  <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:28px;">🧶</div>
+                  <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:28px;"><i class="fa-solid fa-bullseye"></i></div>
                 <?php endif; ?>
 
                 <div class="cart-item-info">
@@ -145,7 +145,7 @@ require_once ROOT . '/includes/header.php';
                   <input type="hidden" name="action"  value="remove">
                   <input type="hidden" name="cart_id" value="<?= $item['cart_id'] ?>">
                   <button class="remove-btn" title="Remove"
-                          data-confirm="Remove this item from cart?">✕</button>
+                          data-confirm="Remove this item from cart?"><i class="fa-solid fa-xmark"></i></button>
                 </form>
               </div>
             <?php endforeach; ?>
@@ -173,7 +173,7 @@ require_once ROOT . '/includes/header.php';
 
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">🛒</div>
+          <div class="empty-icon"><i class="fa-solid fa-cart-shopping"></i></div>
           <h3>Your cart is empty</h3>
           <p>Browse our collection and add something beautiful!</p>
           <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-dark">Shop Now</a>

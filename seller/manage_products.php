@@ -92,7 +92,7 @@ require_once ROOT . '/includes/header.php';
                            style="width:48px;height:48px;border-radius:8px;object-fit:cover;">
                     <?php else: ?>
                       <div style="width:48px;height:48px;border-radius:8px;background:var(--beige);
-                                  display:flex;align-items:center;justify-content:center;font-size:20px;">🧶</div>
+                                  display:flex;align-items:center;justify-content:center;font-size:20px;"><i class="fa-solid fa-bullseye"></i></div>
                     <?php endif; ?>
                   </td>
 
@@ -138,7 +138,7 @@ require_once ROOT . '/includes/header.php';
 
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">🧶</div>
+          <div class="empty-icon"><i class="fa-solid fa-bullseye"></i></div>
           <h3>No products yet</h3>
           <p>Start selling by adding your first handmade item.</p>
           <a href="<?= BASE_URL ?>/seller/add_product.php" class="btn btn-dark">+ Add Product</a>

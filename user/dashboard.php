@@ -43,22 +43,22 @@ require_once ROOT . '/includes/header.php';
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-card-icon">📦</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-box"></i></div>
           <div class="stat-card-value"><?= $totalOrders ?></div>
           <div class="stat-card-label">Total Orders</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">✏️</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-pen"></i></div>
           <div class="stat-card-value"><?= $totalCustom ?></div>
           <div class="stat-card-label">Custom Requests</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
           <div class="stat-card-value">NPR <?= number_format($totalSpent, 0) ?></div>
           <div class="stat-card-label">Total Spent</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">🛒</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
           <div class="stat-card-value"><?= cartCount($pdo) ?></div>
           <div class="stat-card-label">Items in Cart</div>
         </div>
@@ -102,7 +102,7 @@ require_once ROOT . '/includes/header.php';
           </div>
         <?php else: ?>
           <div class="empty-state" style="padding:40px 20px;">
-            <div class="empty-icon">📦</div>
+            <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
             <h3>No orders yet</h3>
             <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-dark" style="margin-top:12px;">Start Shopping</a>
           </div>

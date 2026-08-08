@@ -64,7 +64,7 @@ require_once ROOT . '/includes/header.php';
             <img src="<?= UPLOAD_URL . htmlspecialchars($product['image_path']) ?>"
                  alt="<?= htmlspecialchars($product['name']) ?>">
           <?php else: ?>
-            <div class="product-detail-img-ph">🧶</div>
+            <div class="product-detail-img-ph"><i class="fa-solid fa-bullseye"></i></div>
           <?php endif; ?>
         </div>
 

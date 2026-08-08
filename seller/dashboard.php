@@ -60,22 +60,22 @@ require_once ROOT . '/includes/header.php';
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-card-icon">🧶</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-bullseye"></i></div>
           <div class="stat-card-value"><?= $totalProds ?></div>
           <div class="stat-card-label">Products Listed</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">📦</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-box"></i></div>
           <div class="stat-card-value"><?= $totalOrders ?></div>
           <div class="stat-card-label">Total Orders</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">✏️</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-pen"></i></div>
           <div class="stat-card-value"><?= $pendingCustom ?></div>
           <div class="stat-card-label">Pending Requests</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
           <div class="stat-card-value">NPR <?= number_format($totalRevenue, 0) ?></div>
           <div class="stat-card-label">Total Revenue</div>
         </div>
@@ -116,7 +116,7 @@ require_once ROOT . '/includes/header.php';
           </div>
         <?php else: ?>
           <div class="empty-state" style="padding:40px 20px;">
-            <div class="empty-icon">📦</div>
+            <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
             <h3>No orders yet</h3>
             <p>List your first product to start getting orders!</p>
             <a href="<?= BASE_URL ?>/seller/add_product.php" class="btn btn-dark" style="margin-top:12px;">Add Product</a>

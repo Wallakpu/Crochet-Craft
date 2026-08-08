@@ -4,7 +4,7 @@ requireRole('seller');
 
 $uid = currentUser()['id'];
 
-// ── Accept / Decline action ───────────────────────────────
+//  Accept / Decline action 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $coId   = (int)($_POST['custom_order_id'] ?? 0);
     $action = $_POST['action'] ?? '';
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Fetch custom orders directed at this seller ───────────
+//  Fetch custom orders for seler
 $stmt = $pdo->prepare(
     "SELECT co.*, u.name AS customer_name, u.email AS customer_email
      FROM custom_orders co
@@ -65,6 +65,15 @@ require_once ROOT . '/includes/header.php';
                   <div>
                     <strong>Description</strong><br>
                     <span style="color:var(--brown-mid);"><?= nl2br(htmlspecialchars($co['description'])) ?></span>
+                    <?php if ($co['reference_image']): ?>
+                      <div style="margin-top:10px;">
+                        <strong>Demo Picture</strong><br>
+                        <a href="<?= BASE_URL ?>/uploads/custom_orders/<?= htmlspecialchars($co['reference_image']) ?>" target="_blank">
+                          <img src="<?= BASE_URL ?>/uploads/custom_orders/<?= htmlspecialchars($co['reference_image']) ?>"
+                               alt="Reference image" style="max-width:160px;border-radius:8px;margin-top:6px;display:block;">
+                        </a>
+                      </div>
+                    <?php endif; ?>
                   </div>
                   <div>
                     <div style="margin-bottom:8px;">
@@ -112,7 +121,7 @@ require_once ROOT . '/includes/header.php';
 
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">✉️</div>
+          <div class="empty-icon"><i class="fa-solid fa-envelope"></i></div>
           <h3>No custom requests yet</h3>
           <p>When customers send you custom order requests, they'll appear here.</p>
         </div>

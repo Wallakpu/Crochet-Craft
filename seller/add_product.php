@@ -115,7 +115,7 @@ require_once ROOT . '/includes/header.php';
                 <?php foreach ($cats as $c): ?>
                   <option value="<?= htmlspecialchars($c['name']) ?>"
                     <?= ($_POST['category'] ?? '') === $c['name'] ? 'selected' : '' ?>>
-                    <?= $c['icon'] ?> <?= htmlspecialchars($c['name']) ?>
+                    <?= htmlspecialchars($c['name']) ?>
                   </option>
                 <?php endforeach; ?>
               </select>
@@ -127,7 +127,7 @@ require_once ROOT . '/includes/header.php';
               <div class="img-upload-area">
                 <input type="file" id="productImage" name="image"
                        accept="image/jpeg,image/png,image/gif,image/webp">
-                <div class="upload-icon">📷</div>
+                <div class="upload-icon"><i class="fa-solid fa-camera"></i></div>
                 <p>Click to upload or drag an image here<br>
                    <small>JPG, PNG, GIF, WebP — max 5 MB</small></p>
                 <img id="imagePreview" class="img-preview" src="" alt="" style="display:none;">

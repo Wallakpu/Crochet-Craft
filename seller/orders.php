@@ -109,7 +109,7 @@ require_once ROOT . '/includes/header.php';
         </div>
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">📦</div>
+          <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
           <h3>No orders yet</h3>
           <p>Orders will appear here once customers buy your products.</p>
         </div>

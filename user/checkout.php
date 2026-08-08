@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $pdo->beginTransaction();
 
-            // Create order record
             $ins = $pdo->prepare(
                 'INSERT INTO orders (user_id, total_amount, shipping_name, shipping_address, shipping_phone)
                  VALUES (?,?,?,?,?)'
@@ -41,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ins->execute([$uid, $total, $name, $address, $phone]);
             $orderId = $pdo->lastInsertId();
 
-            // Insert order items and decrement stock
             $insItem = $pdo->prepare(
                 'INSERT INTO order_items (order_id, product_id, product_name, quantity, unit_price)
                  VALUES (?,?,?,?,?)'
@@ -68,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
             }
 
-            // Clear cart
             $pdo->prepare('DELETE FROM cart WHERE user_id = ?')->execute([$uid]);
 
             $pdo->commit();
@@ -86,6 +83,39 @@ $pageTitle = 'Checkout — CrochetCraft';
 require_once ROOT . '/includes/header.php';
 ?>
 
+<style>
+.payment-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px solid var(--beige);
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  background: #fff;
+}
+.payment-option input[type="radio"] { display: none; }
+.payment-option--active,
+.payment-option:has(input:checked) {
+  border-color: var(--rust);
+  background: #fdf6f2;
+}
+.payment-option-icon { font-size: 24px; line-height: 1; }
+.payment-option-title { font-weight: 600; font-size: 14px; color: var(--brown); }
+.payment-option-sub   { font-size: 12px; color: var(--brown-mid); margin-top: 2px; }
+
+@media (max-width: 480px) {
+  .payment-methods { grid-template-columns: 1fr; }
+}
+</style>
+
 <div class="page-top">
   <div class="page-header">
     <div class="container">
@@ -97,7 +127,6 @@ require_once ROOT . '/includes/header.php';
     <div class="container">
       <div class="cart-layout">
 
-        <!-- Shipping form -->
         <div class="panel">
           <div class="panel-header"><h3>Shipping Details</h3></div>
           <div class="panel-body">
@@ -126,8 +155,63 @@ require_once ROOT . '/includes/header.php';
                 ?></textarea>
               </div>
 
-              <!-- Review items -->
-              <h3 style="margin:24px 0 16px;">Order Items</h3>
+              <!-- Payment Method -->
+              <h3 style="margin:24px 0 14px;">Payment Method</h3>
+              <div class="payment-methods">
+                <label class="payment-option payment-option--active" id="lbl-cod">
+                  <input type="radio" name="payment_method" value="cod" checked
+                         onchange="toggleCard(false)">
+                  <span class="payment-option-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+                  <div>
+                    <div class="payment-option-title">Cash on Delivery</div>
+                    <div class="payment-option-sub">Pay when it arrives</div>
+                  </div>
+                </label>
+                <label class="payment-option" id="lbl-card">
+                  <input type="radio" name="payment_method" value="card"
+                         onchange="toggleCard(true)">
+                  <span class="payment-option-icon"><i class="fa-solid fa-credit-card"></i></span>
+                  <div>
+                    <div class="payment-option-title">Card Payment</div>
+                    <div class="payment-option-sub">Visa / Mastercard</div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Card details (non-functional UI) -->
+              <div id="card-details" style="display:none;margin-top:16px;">
+                <div class="form-group">
+                  <label>Cardholder Name</label>
+                  <input type="text" id="card_name" placeholder="Name as on card"
+                         autocomplete="cc-name">
+                </div>
+                <div class="form-group">
+                  <label>Card Number</label>
+                  <input type="text" id="card_number" placeholder="0000 0000 0000 0000"
+                         maxlength="19" autocomplete="cc-number"
+                         oninput="formatCardNumber(this)">
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div class="form-group">
+                    <label>Expiry Date</label>
+                    <input type="text" id="card_expiry" placeholder="MM/YY"
+                           maxlength="5" autocomplete="cc-exp"
+                           oninput="formatExpiry(this)">
+                  </div>
+                  <div class="form-group">
+                    <label>CVV</label>
+                    <input type="text" id="card_cvv" placeholder="•••"
+                           maxlength="3" autocomplete="off"
+                           oninput="this.value=this.value.replace(/\D/g,'')">
+                  </div>
+                </div>
+                <p style="font-size:12px;color:var(--brown-mid);margin-top:2px;">
+                  <i class="fa-solid fa-lock"></i> Your card details are encrypted and secure.
+                </p>
+              </div>
+
+              <!-- Order items review -->
+              <h3 style="margin:24px 0 14px;">Order Items</h3>
               <?php foreach ($items as $item): ?>
                 <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px;">
                   <span><?= htmlspecialchars($item['name']) ?> × <?= $item['quantity'] ?></span>
@@ -151,7 +235,7 @@ require_once ROOT . '/includes/header.php';
           <div class="sum-row"><span>Shipping</span><span>NPR <?= number_format($shipping, 0) ?></span></div>
           <div class="sum-row total"><span>Total</span><span>NPR <?= number_format($total, 0) ?></span></div>
           <p style="font-size:12px;color:var(--brown-mid);margin-top:16px;line-height:1.6;">
-            Payment is collected on delivery (COD). We'll contact you to confirm your order.
+            We'll send you a confirmation once your order is received.
           </p>
         </div>
 
@@ -159,5 +243,24 @@ require_once ROOT . '/includes/header.php';
     </div>
   </div>
 </div>
+
+<script>
+function toggleCard(show) {
+  document.getElementById('card-details').style.display = show ? 'block' : 'none';
+  document.getElementById('lbl-cod').classList.toggle('payment-option--active', !show);
+  document.getElementById('lbl-card').classList.toggle('payment-option--active', show);
+}
+
+function formatCardNumber(input) {
+  let v = input.value.replace(/\D/g, '').slice(0, 16);
+  input.value = v.replace(/(.{4})/g, '$1 ').trim();
+}
+
+function formatExpiry(input) {
+  let v = input.value.replace(/\D/g, '').slice(0, 4);
+  if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+  input.value = v;
+}
+</script>
 
 <?php require_once ROOT . '/includes/footer.php'; ?>

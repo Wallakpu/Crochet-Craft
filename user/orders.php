@@ -107,7 +107,7 @@ require_once ROOT . '/includes/header.php';
                                 <img src="<?= UPLOAD_URL . htmlspecialchars($vi['image_path']) ?>"
                                      style="width:40px;height:40px;border-radius:6px;object-fit:cover;">
                               <?php else: ?>
-                                <div style="width:40px;height:40px;border-radius:6px;background:var(--beige);display:flex;align-items:center;justify-content:center;">🧶</div>
+                                <div style="width:40px;height:40px;border-radius:6px;background:var(--beige);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-bullseye"></i></div>
                               <?php endif; ?>
                               <div>
                                 <div><strong><?= htmlspecialchars($vi['product_name']) ?></strong></div>
@@ -133,7 +133,7 @@ require_once ROOT . '/includes/header.php';
           </div>
         <?php else: ?>
           <div class="empty-state">
-            <div class="empty-icon">📦</div>
+            <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
             <h3>No orders yet</h3>
             <p>Time to treat yourself!</p>
             <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-dark">Shop Now</a>
@@ -181,7 +181,7 @@ require_once ROOT . '/includes/header.php';
           </div>
         <?php else: ?>
           <div class="empty-state">
-            <div class="empty-icon">✏️</div>
+            <div class="empty-icon"><i class="fa-solid fa-pen"></i></div>
             <h3>No custom orders</h3>
             <p>Request a custom piece made just for you!</p>
             <a href="<?= BASE_URL ?>/user/custom_order.php" class="btn btn-outline">Request Custom Order</a>

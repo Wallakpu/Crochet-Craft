@@ -46,7 +46,7 @@
     </div>
 
     <div class="footer-bottom">
-      &copy; <?= date('Y') ?> CrochetCraft. All rights reserved. Made with 🧶 in Nepal.
+      &copy; <?= date('Y') ?> CrochetCraft. All rights reserved. Made with <i class="fa-solid fa-bullseye"></i> in Nepal.
     </div>
   </div>
 </footer>

@@ -94,7 +94,7 @@ require_once ROOT . '/includes/header.php';
       <!-- Filter bar -->
       <form method="GET" class="filter-bar">
         <div class="search-wrap">
-          <span class="si">🔍</span>
+          <span class="si"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" name="q" value="<?= htmlspecialchars($search) ?>"
                  placeholder="Search products…">
         </div>
@@ -102,8 +102,8 @@ require_once ROOT . '/includes/header.php';
         <select name="category" class="filter-select">
           <option value="">All categories</option>
           <?php foreach ($cats as $c): ?>
-            <option value="<?= htmlspecialchars($c['slug']) ?>"
-              <?= $category === $c['slug'] ? 'selected' : '' ?>>
+            <option value="<?= htmlspecialchars($c['name']) ?>"
+              <?= $category === $c['name'] ? 'selected' : '' ?>>
               <?= htmlspecialchars($c['name']) ?>
             </option>
           <?php endforeach; ?>
@@ -138,7 +138,7 @@ require_once ROOT . '/includes/header.php';
                        src="<?= UPLOAD_URL . htmlspecialchars($p['image_path']) ?>"
                        alt="<?= htmlspecialchars($p['name']) ?>">
                 <?php else: ?>
-                  <div class="product-card-placeholder">🧶</div>
+                  <div class="product-card-placeholder"><i class="fa-solid fa-bullseye"></i></div>
                 <?php endif; ?>
               </a>
               <div class="product-card-body">
@@ -182,7 +182,7 @@ require_once ROOT . '/includes/header.php';
 
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">🔍</div>
+          <div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           <h3>No products found</h3>
           <p>Try adjusting your filters or search term.</p>
           <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-outline">Clear filters</a>

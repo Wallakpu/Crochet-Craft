@@ -65,14 +65,14 @@ require_once ROOT . '/includes/header.php';
         <label class="role-opt <?= ($_POST['role'] ?? 'user') === 'user' ? 'active' : '' ?>">
           <input type="radio" name="role" value="user"
                  <?= ($_POST['role'] ?? 'user') === 'user' ? 'checked' : '' ?>>
-          <div class="role-opt-icon">🛍️</div>
+          <div class="role-opt-icon"><i class="fa-solid fa-bag-shopping"></i></div>
           <div class="role-opt-label">Customer</div>
           <div class="role-opt-sub">Browse &amp; buy</div>
         </label>
         <label class="role-opt <?= ($_POST['role'] ?? '') === 'seller' ? 'active' : '' ?>">
           <input type="radio" name="role" value="seller"
                  <?= ($_POST['role'] ?? '') === 'seller' ? 'checked' : '' ?>>
-          <div class="role-opt-icon">🧶</div>
+          <div class="role-opt-icon"><i class="fa-solid fa-bullseye"></i></div>
           <div class="role-opt-label">Seller</div>
           <div class="role-opt-sub">List &amp; sell</div>
         </label>

@@ -295,7 +295,7 @@ nav {
 }
 .hero-card-price { font-size: 15px; font-weight: 700; color: var(--rust); }
 
-/* ── Sections ────────────────────────────────────────────── */
+/* Sections */
 .section { padding: 80px 0; }
 .section-alt { background: var(--beige); }
 

@@ -13,6 +13,9 @@ $user      = currentUser();
   <title><?= htmlspecialchars($pageTitle ?? 'CrochetCraft — Handmade with Love') ?></title>
   <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 
@@ -73,7 +76,7 @@ $user      = currentUser();
       <?php endif; ?>
 
       <!-- Hamburger (mobile) -->
-      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
     </div>
   </div>
 </nav>
@@ -86,7 +89,7 @@ $user      = currentUser();
     </form>
     <p style="font-size:13px;color:#999;margin-top:10px;text-align:center;">
       Press <kbd>Esc</kbd> or click outside to close
-      &nbsp;<button id="searchClose" style="background:none;border:none;color:#999;cursor:pointer;font-size:18px;">✕</button>
+      &nbsp;<button id="searchClose" style="background:none;border:none;color:#999;cursor:pointer;font-size:18px;"><i class="fa-solid fa-xmark"></i></button>
     </p>
   </div>
 </div>

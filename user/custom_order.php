@@ -7,7 +7,7 @@ $uid = currentUser()['id'];
 // Fetch all sellers for the dropdown
 $sellers = $pdo->query("SELECT id, name FROM users WHERE role = 'seller' AND status = 'active' ORDER BY name")->fetchAll();
 
-// Pre-select seller from query param (e.g., coming from a product page)
+// Pre-select seller (e.g., coming from a product page)
 $defaultSeller = (int)($_GET['seller'] ?? 0);
 
 $error   = '';
@@ -24,20 +24,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$description) {
         $error = 'Please describe what you want.';
     } else {
-        $ins = $pdo->prepare(
-            'INSERT INTO custom_orders (user_id, seller_id, description, color, size, deadline, budget)
-             VALUES (?,?,?,?,?,?,?)'
-        );
-        $ins->execute([
-            $uid,
-            $sellerId,
-            $description,
-            $color ?: null,
-            $size  ?: null,
-            $deadline ?: null,
-            $budget   ?: null,
-        ]);
-        $success = 'Custom order request submitted! A seller will respond soon.';
+        $imagePath = null;
+
+        // Handle demo/reference image upload
+        if (!empty($_FILES['reference_image']['name'])) {
+            $file    = $_FILES['reference_image'];
+            $allowed = ['image/jpeg','image/png','image/gif','image/webp'];
+            $maxSize = 5 * 1024 * 1024; // 5 MB
+
+            if (!in_array($file['type'], $allowed)) {
+                $error = 'Only JPG, PNG, GIF, or WebP images allowed.';
+            } elseif ($file['size'] > $maxSize) {
+                $error = 'Image must be under 5 MB.';
+            } else {
+                $ext      = pathinfo($file['name'], PATHINFO_EXTENSION);
+                $filename = uniqid('ref_') . '.' . strtolower($ext);
+                $destPath = ROOT . '/uploads/custom_orders/' . $filename;
+
+                if (!move_uploaded_file($file['tmp_name'], $destPath)) {
+                    $error = 'Failed to save image. Check uploads folder permissions.';
+                } else {
+                    $imagePath = $filename;
+                }
+            }
+        }
+
+        if (!$error) {
+            $ins = $pdo->prepare(
+                'INSERT INTO custom_orders (user_id, seller_id, description, color, size, deadline, budget, reference_image)
+                 VALUES (?,?,?,?,?,?,?,?)'
+            );
+            $ins->execute([
+                $uid,
+                $sellerId,
+                $description,
+                $color ?: null,
+                $size  ?: null,
+                $deadline ?: null,
+                $budget   ?: null,
+                $imagePath,
+            ]);
+            $success = 'Custom order request submitted! A seller will respond soon.';
+        }
     }
 }
 
@@ -66,7 +94,7 @@ require_once ROOT . '/includes/header.php';
       <div class="panel">
         <div class="panel-header"><h3>Order Details</h3></div>
         <div class="panel-body">
-          <form method="POST" novalidate>
+          <form method="POST" enctype="multipart/form-data" novalidate>
 
             <!-- Seller selection -->
             <div class="form-group">
@@ -119,6 +147,19 @@ require_once ROOT . '/includes/header.php';
                 <input type="number" name="budget"
                        value="<?= htmlspecialchars($_POST['budget'] ?? '') ?>"
                        placeholder="e.g., 1500" min="0" step="50">
+              </div>
+            </div>
+
+            <!-- Demo/reference image -->
+            <div class="form-group">
+              <label>Demo Picture <span style="color:var(--brown-mid);font-weight:400;">(optional — show us what you have in mind)</span></label>
+              <div class="img-upload-area">
+                <input type="file" id="productImage" name="reference_image"
+                       accept="image/jpeg,image/png,image/gif,image/webp">
+                <div class="upload-icon"><i class="fa-solid fa-camera"></i></div>
+                <p>Click to upload or drag an image here<br>
+                   <small>JPG, PNG, GIF, WebP — max 5 MB</small></p>
+                <img id="imagePreview" class="img-preview" src="" alt="" style="display:none;">
               </div>
             </div>
 
