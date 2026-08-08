@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS crochet_craft CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE crochet_craft;
 
--- Users (customers, sellers, admin — differentiated by role)
+-- Users (customers, sellers, admin : differentiated by role)
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -12,15 +12,15 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Product categories (seeded below)
+-- Product categories 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     slug VARCHAR(100) UNIQUE NOT NULL,
-    icon VARCHAR(10) DEFAULT ''
+    icon VARCHAR(40) DEFAULT ''
 );
 
--- Products listed by sellers
+-- Products listed 
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     seller_id INT NOT NULL,
@@ -70,6 +70,7 @@ CREATE TABLE custom_orders (
     size VARCHAR(100),
     deadline DATE,
     budget DECIMAL(10,2),
+    reference_image VARCHAR(255),
     status ENUM('pending','accepted','declined') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -87,18 +88,16 @@ CREATE TABLE cart (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
--- ============================================================
--- Seed Data
--- ============================================================
 
 INSERT INTO categories (name, slug, icon) VALUES
-('Amigurumi',  'amigurumi',  '🐻'),
-('Hats',       'hats',       '🧢'),
-('Scarves',    'scarves',    '🧣'),
-('Bags',       'bags',       '👜'),
-('Keyrings',   'keyrings',   '🔑'),
-('Plushies',   'plushies',   '🧸'),
-('Home Decor', 'home-decor', '🏠'),
-('Clothing',   'clothing',   '👕');
+('Amigurumi','amigurumi','🐻'),
+('Hats','hats','🧢'),
+('Scarves','scarves','🧣'),
+('Bags','bags','👜'),
+('Keyrings','keyrings','🔑'),
+('Plushies', 'plushies','🧸'),
+('Home Decor','home-decor','🏠'),
+('Clothing','clothing','👕'),
+('Tools & Equipment','tools-equipment', '🪡');
 
 
