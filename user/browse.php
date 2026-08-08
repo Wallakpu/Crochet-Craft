@@ -9,7 +9,7 @@ $minPrice = (float)($_GET['min_price'] ?? 0);
 $maxPrice = (float)($_GET['max_price'] ?? 0);
 
 // ── Pagination ────────────────────────────────────────────
-$perPage  = 12;
+$perPage  = 16;
 $page     = max(1, (int)($_GET['page'] ?? 1));
 $offset   = ($page - 1) * $perPage;
 
@@ -129,7 +129,7 @@ require_once ROOT . '/includes/header.php';
 
       <!-- Product grid -->
       <?php if ($products): ?>
-        <div class="products-grid">
+        <div class="products-grid products-grid-shop">
           <?php foreach ($products as $p): ?>
             <div class="product-card">
               <a href="<?= BASE_URL ?>/user/product.php?id=<?= $p['id'] ?>">

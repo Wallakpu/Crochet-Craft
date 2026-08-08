@@ -345,6 +345,18 @@ nav {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.products-grid-shop {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .products-grid-shop { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .products-grid-shop { grid-template-columns: repeat(2, 1fr); }
+}
+
 .product-card {
   background: var(--white);
   border-radius: var(--radius);
