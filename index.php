@@ -77,7 +77,7 @@ require_once ROOT . '/includes/header.php';
             <div class="hero-card-img" style="padding:0;">
               <img src="<?= UPLOAD_URL . htmlspecialchars($p['image_path']) ?>"
                    alt="<?= htmlspecialchars($p['name']) ?>"
-                   style="width:100%;height:200px;object-fit:cover;">
+                   style="width:100%;height:345px;object-fit:cover;">
             </div>
             <div class="hero-card-body">
               <div class="hero-card-cat"><i class="fa-solid fa-tag"></i> <?= htmlspecialchars($p['category']) ?></div>
@@ -94,7 +94,7 @@ require_once ROOT . '/includes/header.php';
           <div class="hero-card-img" style="padding:0;">
             <img src="<?= BASE_URL ?>/assets/images/hero-card.jpg"
                  alt="Handmade crochet"
-                 style="width:100%;height:200px;object-fit:cover;">
+                 style="width:100%;height:345px;object-fit:cover;">
           </div>
           <div class="hero-card-body">
             <div class="hero-card-cat"><i class="fa-solid fa-cat"></i> Amigurumi</div>

@@ -266,7 +266,7 @@ nav {
 .hero-slideshow {
   position: relative;
   width: 320px;
-  height: 380px;
+  height: 472px;
 }
 
 .hero-card {
@@ -298,10 +298,11 @@ nav {
 }
 
 .hero-card-img {
-  width: 100%; height: 200px;
+  width: 100%; height: 345px;
   background: var(--cream);
   display: flex; align-items: center; justify-content: center;
   color: var(--tan);
+  overflow: hidden;
 }
 
 .hero-card-body { padding: 18px; }
