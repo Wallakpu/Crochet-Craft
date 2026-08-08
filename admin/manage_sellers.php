@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/db.php';
 requireRole('admin');
 
-// ── Actions ────────────────────────────────────────────────
+//  Actions 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetId = (int)($_POST['user_id'] ?? 0);
     $action   = $_POST['action'] ?? '';
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// ── Search ─────────────────────────────────────────────────
+//  Search 
 $search = trim($_GET['q'] ?? '');
 $params = ['seller'];
 $where  = "WHERE u.role = ?";
@@ -65,7 +65,7 @@ require_once ROOT . '/includes/header.php';
       <!-- Search -->
       <form method="GET" class="filter-bar">
         <div class="search-wrap">
-          <span class="si">🔍</span>
+          <span class="si"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" name="q" value="<?= htmlspecialchars($search) ?>"
                  placeholder="Search seller by name or email…">
         </div>
@@ -132,7 +132,7 @@ require_once ROOT . '/includes/header.php';
         </div>
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">🧶</div>
+          <div class="empty-icon"><i class="fa-solid fa-bullseye"></i></div>
           <h3>No sellers found</h3>
         </div>
       <?php endif; ?>
