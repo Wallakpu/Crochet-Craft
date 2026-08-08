@@ -43,32 +43,32 @@ require_once ROOT . '/includes/header.php';
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-card-icon">👤</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-user"></i></div>
           <div class="stat-card-value"><?= $stats['users'] ?></div>
           <div class="stat-card-label">Customers</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">🧶</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-bullseye"></i></div>
           <div class="stat-card-value"><?= $stats['sellers'] ?></div>
           <div class="stat-card-label">Sellers</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">🛍️</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-bag-shopping"></i></div>
           <div class="stat-card-value"><?= $stats['products'] ?></div>
           <div class="stat-card-label">Products</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">📦</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-box"></i></div>
           <div class="stat-card-value"><?= $stats['orders'] ?></div>
           <div class="stat-card-label">Orders</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-sack-dollar"></i></div>
           <div class="stat-card-value">NPR <?= number_format($stats['revenue'], 0) ?></div>
           <div class="stat-card-label">Total Revenue</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">✏️</div>
+          <div class="stat-card-icon"><i class="fa-solid fa-pen"></i></div>
           <div class="stat-card-value"><?= $stats['custom'] ?></div>
           <div class="stat-card-label">Pending Custom</div>
         </div>
