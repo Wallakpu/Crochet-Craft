@@ -8,7 +8,7 @@ $featStmt = $pdo->query(
      JOIN users u ON u.id = p.seller_id
      WHERE p.status = 'available'
      ORDER BY p.created_at DESC
-     LIMIT 8"
+     LIMIT 4"
 );
 $featured = $featStmt->fetchAll();
 
@@ -135,7 +135,7 @@ require_once ROOT . '/includes/header.php';
     </div>
 
     <?php if ($featured): ?>
-      <div class="products-grid">
+      <div class="products-grid products-grid-featured">
         <?php foreach ($featured as $p): ?>
           <div class="product-card">
             <a href="<?= BASE_URL ?>/user/product.php?id=<?= $p['id'] ?>">

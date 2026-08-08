@@ -341,6 +341,10 @@ nav {
   gap: 24px;
 }
 
+.products-grid-featured {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .product-card {
   background: var(--white);
   border-radius: var(--radius);
