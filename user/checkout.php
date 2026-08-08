@@ -112,7 +112,11 @@ require_once ROOT . '/includes/header.php';
 .payment-option-sub   { font-size: 12px; color: var(--brown-mid); margin-top: 2px; }
 
 @media (max-width: 480px) {
-  .payment-methods { grid-template-columns: 1fr; }
+  .payment-methods { gap: 8px; }
+  .payment-option { padding: 10px; gap: 8px; }
+  .payment-option-icon { font-size: 18px; }
+  .payment-option-title { font-size: 12px; }
+  .payment-option-sub   { font-size: 10px; }
 }
 </style>
 
