@@ -56,7 +56,7 @@ require_once ROOT . '/includes/header.php';
       <!-- Search -->
       <form method="GET" class="filter-bar">
         <div class="search-wrap">
-          <span class="si">🔍</span>
+          <span class="si"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" name="q" value="<?= htmlspecialchars($search) ?>"
                  placeholder="Search by name or email…">
         </div>
@@ -122,7 +122,7 @@ require_once ROOT . '/includes/header.php';
         </div>
       <?php else: ?>
         <div class="empty-state">
-          <div class="empty-icon">👤</div>
+          <div class="empty-icon"><i class="fa-solid fa-user"></i></div>
           <h3>No customers found</h3>
         </div>
       <?php endif; ?>
