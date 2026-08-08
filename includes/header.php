@@ -29,6 +29,9 @@ $user      = currentUser();
     <ul class="nav-links" id="navLinks">
       <li><a href="<?= BASE_URL ?>/user/browse.php">Shop</a></li>
       <li><a href="<?= BASE_URL ?>/user/browse.php?view=categories">Categories</a></li>
+      <?php if (!$user || $user['role'] === 'user'): ?>
+        <li><a href="<?= BASE_URL ?>/user/custom_order.php">Custom Order</a></li>
+      <?php endif; ?>
       <li><a href="<?= BASE_URL ?>/index.php#about">About</a></li>
       <li><a href="<?= BASE_URL ?>/index.php#contact">Contact</a></li>
     </ul>
