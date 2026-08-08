@@ -14,6 +14,16 @@ $featured = $featStmt->fetchAll();
 
 $cats = $pdo->query("SELECT * FROM categories ORDER BY (name = 'Other'), name")->fetchAll();
 
+$slideStmt = $pdo->query(
+    "SELECT p.*, u.name AS seller_name
+     FROM products p
+     JOIN users u ON u.id = p.seller_id
+     WHERE p.status = 'available' AND p.image_path IS NOT NULL AND p.image_path <> ''
+     ORDER BY RAND()
+     LIMIT 6"
+);
+$slides = $slideStmt->fetchAll();
+
 require_once ROOT . '/includes/header.php';
 ?>
 
@@ -60,23 +70,60 @@ require_once ROOT . '/includes/header.php';
   <div class="hero-right">
     <div class="new-arrivals-badge"><i class="fa-solid fa-seedling"></i> New arrivals</div>
 
-    <div class="hero-card">
-      <div class="hero-card-img" style="padding:0;">
-        <img src="<?= BASE_URL ?>/assets/images/hero-card.jpg"
-             alt="Bear Amigurumi"
-             style="width:100%;height:200px;object-fit:cover;">
-      </div>
-      <div class="hero-card-body">
-        <div class="hero-card-cat"><i class="fa-solid fa-cat"></i> Amigurumi</div>
-        <div class="hero-card-name">Cute Teddy Bear Amigurumi</div>
-        <div class="hero-card-foot">
-          <span class="hero-card-price">NPR 950</span>
-          <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-dark btn-sm">Add</a>
+    <div class="hero-slideshow">
+      <?php if ($slides): ?>
+        <?php foreach ($slides as $i => $p): ?>
+          <div class="hero-card<?= $i === 0 ? ' active' : '' ?>">
+            <div class="hero-card-img" style="padding:0;">
+              <img src="<?= UPLOAD_URL . htmlspecialchars($p['image_path']) ?>"
+                   alt="<?= htmlspecialchars($p['name']) ?>"
+                   style="width:100%;height:200px;object-fit:cover;">
+            </div>
+            <div class="hero-card-body">
+              <div class="hero-card-cat"><i class="fa-solid fa-tag"></i> <?= htmlspecialchars($p['category']) ?></div>
+              <div class="hero-card-name"><?= htmlspecialchars($p['name']) ?></div>
+              <div class="hero-card-foot">
+                <span class="hero-card-price">NPR <?= number_format($p['price'], 0) ?></span>
+                <a href="<?= BASE_URL ?>/user/product.php?id=<?= $p['id'] ?>" class="btn btn-dark btn-sm">View</a>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div class="hero-card active">
+          <div class="hero-card-img" style="padding:0;">
+            <img src="<?= BASE_URL ?>/assets/images/hero-card.jpg"
+                 alt="Handmade crochet"
+                 style="width:100%;height:200px;object-fit:cover;">
+          </div>
+          <div class="hero-card-body">
+            <div class="hero-card-cat"><i class="fa-solid fa-cat"></i> Amigurumi</div>
+            <div class="hero-card-name">Handmade with Love</div>
+            <div class="hero-card-foot">
+              <span class="hero-card-price">Shop Now</span>
+              <a href="<?= BASE_URL ?>/user/browse.php" class="btn btn-dark btn-sm">Browse</a>
+            </div>
+          </div>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
+
+<?php if (count($slides) > 1): ?>
+<script>
+(function () {
+  const cards = document.querySelectorAll('.hero-slideshow .hero-card');
+  if (cards.length < 2) return;
+  let current = 0;
+  setInterval(function () {
+    cards[current].classList.remove('active');
+    current = (current + 1) % cards.length;
+    cards[current].classList.add('active');
+  }, 3500);
+})();
+</script>
+<?php endif; ?>
 
 <!--  Featured Products  -->
 <section class="section" id="shop">
