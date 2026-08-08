@@ -2,7 +2,6 @@
 require_once __DIR__ . '/config/db.php';
 $pageTitle = 'CrochetCraft — Handmade with Love';
 
-// Fetch 8 latest available products for the homepage grid
 $featStmt = $pdo->query(
     "SELECT p.*, u.name AS seller_name
      FROM products p
@@ -13,17 +12,16 @@ $featStmt = $pdo->query(
 );
 $featured = $featStmt->fetchAll();
 
-// Fetch all categories
 $cats = $pdo->query("SELECT * FROM categories ORDER BY name")->fetchAll();
 
 require_once ROOT . '/includes/header.php';
 ?>
 
-<!-- ── Hero ──────────────────────────────────────────────── -->
+<!--  Hero  -->
 <section class="hero">
 
   <div class="hero-left">
-    <div class="hero-badge">✦ Handmade in Nepal</div>
+    <div class="hero-badge"><i class="fa-solid fa-star"></i> Handmade in Nepal</div>
 
     <h1 class="hero-title">
       Crafted with
@@ -60,7 +58,7 @@ require_once ROOT . '/includes/header.php';
 
   <!-- Decorative right panel -->
   <div class="hero-right">
-    <div class="new-arrivals-badge">🌱 New arrivals</div>
+    <div class="new-arrivals-badge"><i class="fa-solid fa-seedling"></i> New arrivals</div>
 
     <div class="hero-card">
       <div class="hero-card-img" style="padding:0;">
@@ -69,7 +67,7 @@ require_once ROOT . '/includes/header.php';
              style="width:100%;height:200px;object-fit:cover;">
       </div>
       <div class="hero-card-body">
-        <div class="hero-card-cat">🐻 Amigurumi</div>
+        <div class="hero-card-cat"><i class="fa-solid fa-cat"></i> Amigurumi</div>
         <div class="hero-card-name">Cute Teddy Bear Amigurumi</div>
         <div class="hero-card-foot">
           <span class="hero-card-price">NPR 950</span>
@@ -80,7 +78,7 @@ require_once ROOT . '/includes/header.php';
   </div>
 </section>
 
-<!-- ── Featured Products ──────────────────────────────────── -->
+<!--  Featured Products  -->
 <section class="section" id="shop">
   <div class="container">
     <div class="section-header">
@@ -99,7 +97,7 @@ require_once ROOT . '/includes/header.php';
                      src="<?= UPLOAD_URL . htmlspecialchars($p['image_path']) ?>"
                      alt="<?= htmlspecialchars($p['name']) ?>">
               <?php else: ?>
-                <div class="product-card-placeholder">🧶</div>
+                <div class="product-card-placeholder"><i class="fa-solid fa-bullseye"></i></div>
               <?php endif; ?>
             </a>
             <div class="product-card-body">
@@ -131,7 +129,7 @@ require_once ROOT . '/includes/header.php';
 
     <?php else: ?>
       <div class="empty-state">
-        <div class="empty-icon">🧶</div>
+        <div class="empty-icon"><i class="fa-solid fa-bullseye"></i></div>
         <h3>No products yet</h3>
         <p>Our sellers are getting ready. Check back soon!</p>
       </div>
@@ -139,7 +137,7 @@ require_once ROOT . '/includes/header.php';
   </div>
 </section>
 
-<!-- ── Categories ────────────────────────────────────────── -->
+<!-- Categories  -->
 <section class="section section-alt" id="categories">
   <div class="container">
     <div class="section-header">
@@ -148,9 +146,9 @@ require_once ROOT . '/includes/header.php';
     </div>
     <div class="categories-grid">
       <?php foreach ($cats as $cat): ?>
-        <a href="<?= BASE_URL ?>/user/browse.php?category=<?= urlencode($cat['slug']) ?>"
+        <a href="<?= BASE_URL ?>/user/browse.php?category=<?= urlencode($cat['name']) ?>"
            class="cat-card">
-          <div class="cat-icon"><?= $cat['icon'] ?></div>
+          <div class="cat-icon"><i class="<?= htmlspecialchars($cat['icon']) ?>"></i></div>
           <div class="cat-name"><?= htmlspecialchars($cat['name']) ?></div>
         </a>
       <?php endforeach; ?>
@@ -158,7 +156,7 @@ require_once ROOT . '/includes/header.php';
   </div>
 </section>
 
-<!-- ── Custom Order CTA ───────────────────────────────────── -->
+<!--  Custom Order CTA  -->
 <section class="section">
   <div class="container">
     <div class="cta-banner">
@@ -173,7 +171,7 @@ require_once ROOT . '/includes/header.php';
   </div>
 </section>
 
-<!-- ── About ─────────────────────────────────────────────── -->
+<!--  About  -->
 <section class="section section-alt" id="about">
   <div class="container" style="max-width:720px;text-align:center;">
     <div class="section-tag">Our Story</div>
@@ -186,7 +184,7 @@ require_once ROOT . '/includes/header.php';
   </div>
 </section>
 
-<!-- ── Contact ───────────────────────────────────────────── -->
+<!--  Contact  -->
 <section class="section" id="contact">
   <div class="container" style="max-width:520px;">
     <div class="section-header">
@@ -199,9 +197,9 @@ require_once ROOT . '/includes/header.php';
           Have questions? Reach out and we'll get back to you within 24 hours.
         </p>
         <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--brown-mid);">
-          <div>📧 &nbsp;<strong>hello@crochetcraft.np</strong></div>
-          <div>📞 &nbsp;<strong>+977-9800000000</strong></div>
-          <div>📍 &nbsp;Kathmandu, Nepal</div>
+          <div><i class="fa-solid fa-envelope"></i> &nbsp;<strong>hello@crochetcraft.np</strong></div>
+          <div><i class="fa-solid fa-phone"></i> &nbsp;<strong>+977-9800000000</strong></div>
+          <div><i class="fa-solid fa-location-dot"></i> &nbsp;Kathmandu, Nepal</div>
         </div>
       </div>
     </div>
