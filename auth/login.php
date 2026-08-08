@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password_hash'])) {
+        if ($user && $password === $user['password_hash']) {
             if ($user['status'] === 'suspended') {
                 $error = 'Your account has been suspended. Contact support.';
             } else {

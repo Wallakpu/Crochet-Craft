@@ -17,12 +17,11 @@ if ($existing) {
 $name     = 'Admin';
 $email    = 'admin@crochetcraft.com';
 $password = 'Admin@1234';
-$hash     = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $pdo->prepare(
     "INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,'admin')"
 );
-$stmt->execute([$name, $email, $hash]);
+$stmt->execute([$name, $email, $password]);
 
 echo '<div style="font-family:sans-serif;max-width:400px;margin:60px auto;padding:30px;
       border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.1);">';

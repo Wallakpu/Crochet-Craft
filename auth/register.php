@@ -33,11 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($chk->fetch()) {
             $error = 'An account with that email already exists.';
         } else {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
             $ins  = $pdo->prepare(
                 'INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,?)'
             );
-            $ins->execute([$name, $email, $hash, $role]);
+            $ins->execute([$name, $email, $password, $role]);
 
             header('Location: ' . BASE_URL . '/auth/login.php?registered=1');
             exit;

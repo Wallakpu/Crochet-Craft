@@ -38,10 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (strlen($newPassword) < 6) {
                     $error = 'New password must be at least 6 characters.';
                 } else {
-                    $hash = password_hash($newPassword, PASSWORD_DEFAULT);
                     $pdo->prepare(
                         'UPDATE users SET name=?, email=?, role=?, status=?, password_hash=? WHERE id=?'
-                    )->execute([$name, $email, $role, $status, $hash, $id]);
+                    )->execute([$name, $email, $role, $status, $newPassword, $id]);
                 }
             } else {
                 $pdo->prepare(
