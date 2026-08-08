@@ -6,9 +6,9 @@ $id = (int)($_GET['id'] ?? 0);
 
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ? AND role != 'admin'");
 $stmt->execute([$id]);
-$user = $stmt->fetch();
+$editUser = $stmt->fetch();
 
-if (!$user) {
+if (!$editUser) {
     header('Location: ' . BASE_URL . '/admin/manage_users.php');
     exit;
 }
@@ -19,8 +19,8 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name   = trim($_POST['name']   ?? '');
     $email  = trim($_POST['email']  ?? '');
-    $role   = in_array($_POST['role'] ?? '', ['user','seller']) ? $_POST['role'] : $user['role'];
-    $status = in_array($_POST['status'] ?? '', ['active','suspended']) ? $_POST['status'] : $user['status'];
+    $role   = in_array($_POST['role'] ?? '', ['user','seller']) ? $_POST['role'] : $editUser['role'];
+    $status = in_array($_POST['status'] ?? '', ['active','suspended']) ? $_POST['status'] : $editUser['status'];
 
     if (!$name || !$email) {
         $error = 'Name and email are required.';
@@ -51,17 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$error) {
                 $success = 'User updated successfully.';
                 // Refresh user data
-                $stmt->execute([$id]);
-                $user = $pdo->prepare("SELECT * FROM users WHERE id = ?")->execute([$id]) && ($user = $stmt->fetch());
                 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
                 $stmt->execute([$id]);
-                $user = $stmt->fetch();
+                $editUser = $stmt->fetch();
             }
         }
     }
 }
 
-$backUrl = $user['role'] === 'seller'
+$backUrl = $editUser['role'] === 'seller'
     ? BASE_URL . '/admin/manage_sellers.php'
     : BASE_URL . '/admin/manage_users.php';
 
@@ -88,8 +86,8 @@ require_once ROOT . '/includes/header.php';
 
       <div class="panel">
         <div class="panel-header">
-          <h3><?= htmlspecialchars($user['name']) ?></h3>
-          <span class="badge badge-<?= $user['role'] ?>"><?= ucfirst($user['role']) ?></span>
+          <h3><?= htmlspecialchars($editUser['name']) ?></h3>
+          <span class="badge badge-<?= $editUser['role'] ?>"><?= ucfirst($editUser['role']) ?></span>
         </div>
         <div class="panel-body">
           <form method="POST" novalidate>
@@ -97,28 +95,28 @@ require_once ROOT . '/includes/header.php';
             <div class="form-group">
               <label>Full Name</label>
               <input type="text" name="name"
-                     value="<?= htmlspecialchars($_POST['name'] ?? $user['name']) ?>" required>
+                     value="<?= htmlspecialchars($_POST['name'] ?? $editUser['name']) ?>" required>
             </div>
 
             <div class="form-group">
               <label>Email Address</label>
               <input type="email" name="email"
-                     value="<?= htmlspecialchars($_POST['email'] ?? $user['email']) ?>" required>
+                     value="<?= htmlspecialchars($_POST['email'] ?? $editUser['email']) ?>" required>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label>Role</label>
                 <select name="role">
-                  <option value="user"   <?= ($user['role']==='user')   ? 'selected':'' ?>>Customer</option>
-                  <option value="seller" <?= ($user['role']==='seller') ? 'selected':'' ?>>Seller</option>
+                  <option value="user"   <?= ($editUser['role']==='user')   ? 'selected':'' ?>>Customer</option>
+                  <option value="seller" <?= ($editUser['role']==='seller') ? 'selected':'' ?>>Seller</option>
                 </select>
               </div>
               <div class="form-group">
                 <label>Status</label>
                 <select name="status">
-                  <option value="active"    <?= ($user['status']==='active')    ? 'selected':'' ?>>Active</option>
-                  <option value="suspended" <?= ($user['status']==='suspended') ? 'selected':'' ?>>Suspended</option>
+                  <option value="active"    <?= ($editUser['status']==='active')    ? 'selected':'' ?>>Active</option>
+                  <option value="suspended" <?= ($editUser['status']==='suspended') ? 'selected':'' ?>>Suspended</option>
                 </select>
               </div>
             </div>
@@ -138,7 +136,7 @@ require_once ROOT . '/includes/header.php';
       </div>
 
       <div style="margin-top:12px;font-size:13px;color:var(--brown-mid);">
-        Account created: <?= date('M d, Y H:i', strtotime($user['created_at'])) ?>
+        Account created: <?= date('M d, Y H:i', strtotime($editUser['created_at'])) ?>
       </div>
     </div>
   </div>
